@@ -14,23 +14,27 @@ puts "Moving #{move}"
 
 move.split(",").each do |i|
   i.split('').each do |ii|
-    if ii == r 
+    case 
+    when ii === "r" 
       face = face + 90
-    elsif ii == l 
+      puts "right"
+    when ii === "l" 
       face = face - 90
-    elsif ii == /^([0-9][0-9])/
+    when ii =~ /[0-9]/
       if face = 0
-        y = y + ii
+        y = y + ii.to_i
+        p ii
       elsif face == 90
-        x = x + ii
+        x = x + ii.to_i
       elsif face == 180
-        y = y - ii
+        y = y - ii.to_i
       elsif face == 270
-        x = y - ii
+        x = y - ii.to_i
+      else
+        "incorrect command entered"
       end
     end
-
   end
 end
 
-p x, y
+p x, y, face
