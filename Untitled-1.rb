@@ -1,26 +1,12 @@
+move = "r6r2r7l7"
 
-
-
-def distmath(coords)
-    coords.sort
-    result = 0
-    sum = 0
-    i = 0
-    while i < coords.length
-        result += coords[i] * i - sum
-        sum += coords[i]
-        i += 1
+move.scan(/[a-zA-Z]\d/) do |i|
+    case
+        when i.match(/[l|L]\d/) 
+          p "left"
+          p i[1]
+        when i.match(/[r|R]\d/)
+        p "right"
+        p i[1]
+        end
     end
-    return result
-end
-
-def totaldist( x , y  )
-    dstartx = distmath(x).to_i
-    dstarty = distmath(y).to_i 
-    dstart = dstarty + dstartx
-    p dstart
-    end
-
-x = [ 0, -1 ] 
-y = [ 0, 26 ]
-totaldist(x, y)
