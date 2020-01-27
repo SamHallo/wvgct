@@ -15,33 +15,64 @@ class Robot
   def move(move)
     localx = 0
     localy = 0
-    move.split(",").each do |i|
-      i.split('').each do |ii|
-        case 
-          when ii === "r" 
+    move.scan(/[a-zA-Z]\d/) do |i|
+      case
+          when i.scan(/r|R/)
             @@face += 90
-          when ii === "l" 
+              if @@face == 360
+              @@face = 0
+              end
+              if @@face == 0
+                  localy += i[1].to_i
+                elsif @@face == 90
+                  localx += i[1].to_i
+                elsif @@face == 180
+                  localy += i[1].to_i
+                elsif @@face == 270
+                  localx += i[1].to_i
+                end
+          when i.scan(/l|L/) 
             @@face -= 90
-          when ii =~ /[0-9]/
-            if @@face == 0
-              localy += ii.to_i
-            elsif @@face == 90
-              localx += ii.to_i
-            elsif @@face == 180
-              localy += ii.to_i
-            elsif @@face == 270
-              localx += ii.to_i
-            else
-              p "incorrect command entered"
+            p "DANGER"
+              if @@face == -90
+              @@face = 270
+              end
+              if @@face == 0
+                  localy += i[1].to_i
+                elsif @@face == 90
+                  localx += i[1].to_i
+                elsif @@face == 180
+                  localy += i[1].to_i
+                elsif @@face == 270
+                  localx += i[1].to_i
+                end
+          when i.scan(/f|F/)
+              if @@face == 0
+                  localy += i[1].to_i
+                elsif @@face == 90
+                  localx += i[1].to_i
+                elsif @@face == 180
+                  localy += i[1].to_i
+                elsif @@face == 270
+                  localx += i[1].to_i
+                end
+          when i.scan(/b|B/)
+              if @@face == 0
+                  localy -= i[1].to_i
+                elsif @@face == 90
+                  localx -= i[1].to_i
+                elsif @@face == 180
+                  localy -= i[1].to_i
+                elsif @@face == 270
+                  localx -= i[1].to_i
+                end
+              end
             end
-        end
-      end
-      @@x << localx
-      @@y << localy
-      totaldist(@@x,@@y)
-    end
-
+    @@x << localx
+    @@y << localy
+    totaldist(@@x,@@y)
   end
+
   def distmath(coords)
     result = 0
     sum = 0
@@ -59,6 +90,7 @@ class Robot
     dstarty = distmath(y).to_i 
     dstart = dstarty + dstartx
     p "You are now at #{x[1]},#{y[1]}.","You are #{dstart} units away from the start"
+    p @@face
     end
   end
 
