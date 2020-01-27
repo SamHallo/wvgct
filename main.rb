@@ -17,7 +17,7 @@ class Robot
     localy = 0
     move.scan(/[a-zA-Z]\d/) do |i|
       case
-          when i.scan(/r|R/)
+          when i.match(/[r|R]\d/)
             @@face += 90
               if @@face == 360
               @@face = 0
@@ -31,9 +31,8 @@ class Robot
                 elsif @@face == 270
                   localx += i[1].to_i
                 end
-          when i.scan(/l|L/) 
+          when i.match(/[l|L]\d/) 
             @@face -= 90
-            p "DANGER"
               if @@face == -90
               @@face = 270
               end
@@ -46,7 +45,7 @@ class Robot
                 elsif @@face == 270
                   localx += i[1].to_i
                 end
-          when i.scan(/f|F/)
+          when i.match(/[f|F]\d/)
               if @@face == 0
                   localy += i[1].to_i
                 elsif @@face == 90
@@ -56,7 +55,7 @@ class Robot
                 elsif @@face == 270
                   localx += i[1].to_i
                 end
-          when i.scan(/b|B/)
+          when i.match(/[b|B]\d/)
               if @@face == 0
                   localy -= i[1].to_i
                 elsif @@face == 90
